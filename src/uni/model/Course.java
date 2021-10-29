@@ -2,6 +2,7 @@ package uni.model;
 
 
 import java.util.List;
+import java.util.Objects;
 
 public class Course {
     private String name;
@@ -9,6 +10,9 @@ public class Course {
     private int maxEnrollment;
     private List<Student> studentsEnrolled;
     private int credits;
+
+    public Course() {
+    }
 
     public Course(String name, Person teacher, int maxEnrollment, List<Student> studentsEnrolled, int credits) {
         this.name = name;
@@ -56,5 +60,28 @@ public class Course {
 
     public void setCredits(int credits) {
         this.credits = credits;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Course course)) return false;
+        return maxEnrollment == course.maxEnrollment && credits == course.credits && Objects.equals(name, course.name) && Objects.equals(teacher, course.teacher) && Objects.equals(studentsEnrolled, course.studentsEnrolled);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, teacher, maxEnrollment, studentsEnrolled, credits);
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "name='" + name + '\'' +
+                ", teacher=" + teacher +
+                ", maxEnrollment=" + maxEnrollment +
+                ", studentsEnrolled=" + studentsEnrolled +
+                ", credits=" + credits +
+                '}';
     }
 }
