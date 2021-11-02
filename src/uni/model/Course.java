@@ -1,6 +1,7 @@
 package uni.model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -74,13 +75,26 @@ public class Course {
         return Objects.hash(name, teacher, maxEnrollment, studentsEnrolled, credits);
     }
 
+    /**
+     *
+     * @return list with the names of the students
+     */
+    public List<String> getStudentsNames(){
+        List<String> studentsList = new ArrayList<>();
+        for (Student s : studentsEnrolled){
+            String name = '\'' + s.getLastName() + " " + s.getFirstName() + '\'';
+            studentsList.add(name);
+        }
+        return studentsList;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
                 "name='" + name + '\'' +
-                ", teacher=" + teacher +
+                ", teacher='" + teacher.getLastName() + " " + teacher.getFirstName() + '\'' +
                 ", maxEnrollment=" + maxEnrollment +
-                ", studentsEnrolled=" + studentsEnrolled +
+                ", studentsEnrolled=" + getStudentsNames() +
                 ", credits=" + credits +
                 '}';
     }

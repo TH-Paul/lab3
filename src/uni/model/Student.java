@@ -1,5 +1,6 @@
 package uni.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -53,6 +54,19 @@ public class Student extends Person{
         return Objects.hash(super.hashCode(), studentId);
     }
 
+    /**
+     *
+     * @return list with the names of the courses
+     */
+    public List<String> getCoursesNames(){
+        List<String> coursesList = new ArrayList<>();
+        for (Course c : enrolledCourses){
+            String name = '\'' + c.getName() + '\'';
+            coursesList.add(name);
+        }
+        return coursesList;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -60,7 +74,7 @@ public class Student extends Person{
                 ", lastName='" + lastName + '\'' +
                 ", studentId=" + studentId +
                 ", totalCredits=" + totalCredits +
-                ", enrolledCourses=" + enrolledCourses +
+                ", enrolledCourses=" + getCoursesNames() +
                 '}';
     }
 }
